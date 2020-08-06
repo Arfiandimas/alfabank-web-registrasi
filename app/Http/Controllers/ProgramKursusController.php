@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\ProgramKursus;
 
 class ProgramKursusController extends Controller
 {
     public function showProgramKursus(){
         
-        $program_kursus = DB::table('program_kursus')->get();
+        // $program_kursus = DB::table('program_kursuses')->get();
+        $program_kursus = ProgramKursus::get();
         return view('admin/program_kursus',compact('program_kursus'));
     }
 
@@ -19,7 +21,7 @@ class ProgramKursusController extends Controller
         $request->validate([
             'nama' => 'required|string|max:20',
             'masa_studi' => 'required|string|max:11',
-            'harga' => 'required|integer|max:11',
+            'harga' => 'required|integer|max:10',
             'kuota' => 'required|string|max:11'
         ]);
 
@@ -29,7 +31,7 @@ class ProgramKursusController extends Controller
         // dd($request);
 
         // CARA 1
-        DB::table('program_kursus')->insert([
+        DB::table('program_kursuses')->insert([
             'nama'=>$request->nama,
             'masa_studi'=>$request->masa_studi,
             'harga'=>$request->harga,
@@ -88,7 +90,9 @@ class ProgramKursusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $programkursus = ProgramKursus::find($id);
+
+        return view('admin/edit_program_kursus', compact('programkursus'));
     }
 
     /**
@@ -100,7 +104,23 @@ class ProgramKursusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'string|max:20',
+            'masa_studi' => 'string|max:11',
+            'harga' => 'integer|max:10',
+            'quota' => 'string|max:11'
+        ]);
+
+        $programkursus = ProgramKursus::find($id);
+        
+        $programkursus->nama = $request->name?$request->name : $programkursus->nama;
+        $programkursus->masa_studi = $request->study_period?$request->study_period : $programkursus->masa_studi;
+        $programkursus->harga = $request->price?$request->price : $programkursus->harga;
+        $programkursus->kuota = $request->quota?$request->quota : $programkursus->kuota;
+
+        $programkursus->update();
+
+        return redirect()->back();
     }
 
     /**
@@ -111,6 +131,10 @@ class ProgramKursusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $programkursus = ProgramKursus::find($id);
+        
+        $programkursus->delete();
+
+        return redirect()->back();
     }
 }

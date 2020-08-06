@@ -5,7 +5,7 @@
         <div class="text-center">
           <h3>Register Our Course Program</h3>
           <p>Register our course program and choose best course program for you</p>
-          <a class="cta-btn" href="user-register.html">Register</a>
+          <a class="cta-btn" href="/">Register</a>
         </div>
 
       </div>

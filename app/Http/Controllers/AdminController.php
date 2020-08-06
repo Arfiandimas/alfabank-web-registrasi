@@ -98,6 +98,8 @@ class AdminController extends Controller
 
     public function showSertifikasi()
     {
-        return view('admin/sertifikasi');
+        $user_tersertifikasi = Pendaftaran::with(['users', 'programKursus'])->where('status', '=', 'masa_studi')->paginate(5);
+        
+        return view('admin/sertifikasi', compact('user_tersertifikasi'));
     }
 }

@@ -38,9 +38,17 @@ Route::get('/admin-detail/{id}', 'AdminController@detail');
 
 Route::get('/admin-inbox', 'AdminController@showInbox');
 Route::get('/admin-sertifikasi', 'AdminController@showSertifikasi');
-Route::get('/admin-program-kursus', 'ProgramKursusController@showProgramKursus');
+Route::get('/   ', 'ProgramKursusController@showProgramKursus');
 // untuk menangani create program kursus
 Route::post('/admin-program-kursus/create', 'ProgramKursusController@createProgramKursus');
+
+// untuk menghapus program kursus
+Route::delete('/admin-program-kursus/destroy/{id}', 'ProgramKursusController@destroy')->name('programkursus.destroy');
+
+// untuk update program kursus
+Route::get('/admin-program-kursus/edit/{id}', 'ProgramKursusController@edit')->name('programkursus.edit');
+
+Route::put('/admin-program-kursus/update/{id}', 'ProgramKursusController@update')->name('programkursus.update');
 
 
 Route::view('/admin-login', 'admin.login');

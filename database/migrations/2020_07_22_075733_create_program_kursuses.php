@@ -20,6 +20,7 @@ class CreateProgramKursuses extends Migration
             $table->integer('harga');
             $table->integer('kuota');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

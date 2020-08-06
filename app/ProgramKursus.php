@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProgramKursus extends Model
 {
+    use SoftDeletes;
+    
     public function pendaftarans()
     {
         return $this->hasMany(Pendaftaran::class, 'id_program_kursus', 'id');

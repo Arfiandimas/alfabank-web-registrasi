@@ -64,8 +64,12 @@
                             <td>{{$item->harga}} .000.000</td>
                             <td>{{ $item->kuota }} siswa</td>
                             <td>
-                                <a href="admin-program-kursus-update.html" class="btn btn-sm btn-info">ubah</a>
-                                <a href="#" class="btn btn-sm btn-danger">hapus</a>
+                                <a href="{{ route('programkursus.edit', $item->id) }}" class="btn btn-sm btn-info">ubah</a>
+                                <form action="{{ route('programkursus.destroy', $item->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <input type="submit" class="btn btn-sm btn-danger" value="hapus">
+                                </form>
                             </td>
                         </tr>    
                         @endforeach
